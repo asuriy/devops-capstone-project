@@ -166,3 +166,19 @@ class TestAccountService(TestCase):
         account = self._create_accounts(1)[0]
         resp = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_deletemethod_not_allowed(self):
+        """It should not allow an illegal delete method call"""
+        resp = self.client.delete(BASE_URL)
+        self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+    def test_putmethod_not_allowed(self):
+        """It should not allow an illegal put method call"""
+        resp = self.client.put(BASE_URL)
+        self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+    def test_internal_server_error(self):
+        resp = self.client.get(BASE_URL)
+        resp.status_code = "HTTP_500_INTERNAL_SERVER_ERROR"
+        self.assertEqual(resp.status_code, 0)
+    
