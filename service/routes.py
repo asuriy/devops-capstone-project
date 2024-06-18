@@ -57,10 +57,10 @@ def create_accounts():
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
+
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
-
 @app.route("/accounts", methods=["GET"])
 def list_all_accounts():
     """
@@ -77,7 +77,6 @@ def list_all_accounts():
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
-
 @app.route("/accounts/<int:account_id>", methods=["GET"])
 def read_accounts(account_id):
     """

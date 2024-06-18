@@ -132,7 +132,7 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(data["name"], account.name)
-    
+
     def test_account_not_found(self):
         """It should not Read an Account that is not found"""
         resp = self.client.get(f"{BASE_URL}/0")
@@ -160,7 +160,7 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         updated_account = resp.get_json()
         self.assertEqual(updated_account["name"], "Billie Jean")
-    
+
     def test_delete_account(self):
         """ It should Delete an existing Account """
         account = self._create_accounts(1)[0]
@@ -171,14 +171,13 @@ class TestAccountService(TestCase):
         """It should not allow an illegal delete method call"""
         resp = self.client.delete(BASE_URL)
         self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-    
+
     def test_putmethod_not_allowed(self):
         """It should not allow an illegal put method call"""
         resp = self.client.put(BASE_URL)
         self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-    
+
     def test_internal_server_error(self):
         resp = self.client.get(BASE_URL)
         resp.status_code = "HTTP_500_INTERNAL_SERVER_ERROR"
         self.assertEqual(resp.status_code, 0)
-    
