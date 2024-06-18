@@ -186,7 +186,7 @@ class TestAccountService(TestCase):
         resp = self.client.get(BASE_URL)
         resp.status_code = "HTTP_500_INTERNAL_SERVER_ERROR"
         self.assertEqual(resp.status_code, 0)
-    
+
     def test_security_headers(self):
         """ It should return the headers"""
         resp = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
@@ -199,5 +199,15 @@ class TestAccountService(TestCase):
         }
         for key, value in headers.items():
             self.assertEqual(resp.headers.get(key), value)
+
+    def test_cors_policies(self):
+        """ It should return CORS header """
+        resp = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        headers = {
+            'Access-Control-Allow-Origin': '*'
+        }
+        for key, value in headers.items():
+            self.assertEqual(resp.headers.get(key), value)   
 
 
