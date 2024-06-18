@@ -208,6 +208,4 @@ class TestAccountService(TestCase):
             'Access-Control-Allow-Origin': '*'
         }
         for key, value in headers.items():
-            self.assertEqual(resp.headers.get(key), value)   
-
-
+            self.assertEqual(resp.headers.get(key), value)
