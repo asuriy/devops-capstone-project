@@ -55,7 +55,7 @@ spec:
     - name: tests
       workspaces:
         - name: source
-          workspace: pipeline-workspace          
+          workspace: pipeline-workspace
       taskRef:
         name: nose
       params:
@@ -69,13 +69,13 @@ spec:
     - name: build
       workspaces:
         - name: source
-          workspace: pipeline-workspace          
+          workspace: pipeline-workspace
       taskRef:
         name: buildah
         kind: ClusterTask
       params:
       - name: IMAGE
-        value: "${params.build-image}"
+        value: "$(params.build-image)"
       runAfter:
         - tests
         - lint
